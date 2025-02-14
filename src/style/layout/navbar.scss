@@ -1,0 +1,29 @@
+#navbar {
+  padding: 0 16px 12px;
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--black300);
+
+  ul {
+    display: flex;
+
+    li {
+      font-size: 14px;
+      padding: 6px 4px;
+      margin-left: 6px;
+
+      a {
+        color: rgba(000, 000, 000, var(--text-opacity));
+      }
+      
+      &:first-child {
+        padding: 6px 4px 6px 0;
+        margin-left: 0;
+      }
+
+      &.active > a {
+        font-weight: bold;
+        color: var(--black);
+      }
+    }
+  }
+}

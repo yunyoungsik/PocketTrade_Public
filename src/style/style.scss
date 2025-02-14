@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+/* setting */
+@use "_reset.scss";
+@use "_var.scss";
+@use "_common.scss";
+
+/* section */
+@use "./layout/aside.scss";
+@use "./layout/auth.scss";
+@use "./layout/header.scss";
+@use "./layout/navbar.scss";
+@use "./layout/trade.scss";
+@use "./layout/mypage.scss";
+@use "./layout/dashboard.scss";
+@use "./layout/search.scss";
+@use "./layout/notice.scss";

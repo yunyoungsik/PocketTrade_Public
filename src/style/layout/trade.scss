@@ -1,0 +1,885 @@
+#trade {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  position: relative;
+  height: calc(100vh - 100px);
+
+  .tradeCards {
+    padding: 0 16px 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+
+    @media screen and (max-width: 489px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .writeTradeBtnWrap {
+    position: sticky;
+    bottom: 32px;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 16px;
+  }
+
+  .writeTradeBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    max-width: 102px;
+    padding: 8px 16px;
+    border-radius: 40px;
+    color: var(--white);
+    background-color: var(--black);
+  }
+}
+
+#tradeFilter {
+  overflow-x: scroll;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background-color: var(--bg-color);
+
+  .filterBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    height: 32px;
+    padding: 0 16px;
+    border-radius: 32px;
+    background-color: var(--black250);
+    cursor: pointer;
+
+    .lucide-settings2 {
+      width: 14px;
+      height: 14px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+}
+
+#tradeFilterPopup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 4;
+  transition: all 0.5s ease-in-out;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  width: 100%;
+  max-width: var(--max-width);
+  height: 100vh;
+  border: 1px solid var(--black300);
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &.open {
+    opacity: 1;
+    .popupContainer {
+      transform: translateY(0);
+    }
+  }
+
+  &.close {
+    opacity: 0;
+    .popupContainer {
+      transform: translateY(100%);
+    }
+  }
+
+  .popupContainer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 70vh;
+    transition: all 0.5s ease-in-out;
+    transform: translateY(100%);
+    border-radius: 16px 16px 0 0;
+    background-color: var(--white);
+
+    .popupTop {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      border-bottom: 1px solid var(--black200);
+
+      h2 {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      button {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        background-color: unset;
+
+        .lucide-x {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+
+    .filterContainer {
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      width: 100%;
+      height: calc(100% - 69px);
+      padding: 16px;
+
+      .pokemonFilter {
+        padding-top: 16px;
+      }
+
+      .basicFilter,
+      .pokemonFilter {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .filterBtn {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        padding-top: 16px;
+
+        button {
+          width: 100%;
+          height: 40px;
+          font-size: 16px;
+          font-weight: bold;
+          cursor: pointer;
+
+          &.applyBtn {
+            color: var(--white);
+            border-radius: 4px;
+            background-color: var(--black);
+          }
+        }
+      }
+    }
+  }
+}
+
+#tradeList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 0 16px 16px;
+
+  .loadMoreBtnWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 40px;
+
+    .loadMoreBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 150px;
+      height: 40px;
+      color: var(--black500);
+      border-radius: 4px;
+      background-color: var(--black300);
+      cursor: pointer;
+    }
+  }
+
+  .noData {
+    font-weight: bold;
+    color: var(--black500);
+    text-align: center;
+  }
+}
+
+#tradeCard {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  border-radius: 4px;
+  background-color: var(--white);
+
+  .tradeStatus {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    z-index: 1;
+    padding: 4px 6px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--white);
+    background-color: var(--blue);
+
+    &.completed {
+      background-color: var(--black600);
+    }
+
+    &.trading {
+      display: none;
+    }
+  }
+
+  .tradeCardImages {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background-color: var(--black250);
+    width: 100%;
+    height: auto;
+
+    img {
+      position: relative;
+      z-index: 0;
+      width: auto;
+      height: auto;
+      margin: 0 -50px;
+      min-height: 140px;
+      max-height: 300px;
+      box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+
+      &:hover {
+        z-index: 1;
+        box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+
+  // .image img {
+  //   width: 200px;
+  //   height: auto;
+  //   border-radius: 5px;
+  //   border: 6px solid #fff;
+  //   box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+  // }
+
+  .tradeText {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 15px 10px;
+
+    .title a {
+      display: flex;
+      align-items: center;
+
+      h2 {
+        overflow: hidden;
+        max-width: 100%;
+        font-size: 16px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      span {
+        display: flex;
+        align-items: center;
+        margin-left: 8px;
+        font-size: 14px;
+        line-height: 1;
+        color: var(--black500);
+
+        .lucide-message-circle-more {
+          width: 16px;
+          height: 16px;
+          margin-right: 2px;
+          color: var(--black500);
+        }
+      }
+    }
+
+    .tradeCardName {
+      display: flex;
+      flex-direction: row;
+      gap: 7px;
+
+      p {
+        font-weight: bold;
+      }
+
+      .lucide-arrow-down-up {
+        width: 11px;
+        transform: rotate(90deg);
+        color: var(--black600);
+      }
+    }
+
+    .tradeInfo {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      .authorName {
+        font-weight: bold;
+        span {
+          padding-left: 4px;
+          font-weight: normal;
+        }
+      }
+
+      .authorName,
+      .writeTime {
+        font-size: 14px;
+        color: var(--black600);
+      }
+    }
+  }
+}
+
+#tradeDetail {
+  overflow-y: auto;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  width: 100%;
+  height: calc(100vh - 52px);
+  padding: 16px;
+
+  .tradeStatus {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 8px;
+
+    select {
+      position: relative;
+      z-index: 1;
+      padding: 8px 32px 8px 8px;
+      font-family: var(--font-pretendard);
+      font-size: 16px;
+      font-weight: bold;
+      border: 1px solid var(--black400);
+      border-radius: 4px;
+      background-color: unset;
+      cursor: pointer;
+    }
+
+    .lucide-chevron-down {
+      position: absolute;
+      top: 50%;
+      right: 4px;
+      z-index: 0;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .detailTitle {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--black300);
+
+    h2 {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    ul {
+      display: flex;
+      gap: 4px;
+
+      li {
+        font-size: 14px;
+        color: var(--black500);
+      }
+
+      .titleAuthor {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+
+        p {
+          font-weight: bold;
+        }
+        span {
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  .tradeCards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 8px 0;
+
+    .tradeCardsTitle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 4px;
+
+      h3 {
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      button {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        background-color: unset;
+        cursor: pointer;
+
+        .lucide-letter-text,
+        .lucide-image,
+        .lucide-arrow-left-right {
+          width: 16px;
+          height: 16px;
+          color: var(--black500);
+        }
+      }
+    }
+
+    .textView {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 14px;
+
+      li {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        .lucide-x {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+
+    .imgView {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      gap: 4px;
+
+      img {
+        height: auto;
+      }
+    }
+  }
+
+  .tradeDescription {
+    margin: 24px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--black300);
+
+    p {
+      white-space: pre-wrap;
+      line-height: 162%;
+      overflow-wrap: anywhere;
+      font-size: 16px;
+    }
+    // pre {
+    //   overflow: auto;
+    //   width: 100%;
+    //   font-size: 16px;
+    //   font-family: var(--font-pretendard);
+    //   font-weight: normal;
+    //   word-break: keep-all;
+    // }
+
+    ul {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      li {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: var(--black500);
+
+        button {
+          font-size: 14px;
+          color: var(--black500);
+          background-color: unset;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .tradeComment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .commentList {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+
+      li {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--black250);
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .commentTop {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .author {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+
+            @media screen and (max-width: 489px) {
+              flex-direction: column;
+              align-items: flex-start;
+            }
+
+            p {
+              overflow: hidden;
+              max-width: 200px;
+              font-weight: bold;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+
+            .authorInfo {
+              display: flex;
+              align-items: center;
+              gap: 4px;
+            }
+
+            span {
+              color: var(--black500);
+            }
+          }
+        }
+
+        .commentBtn {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          button {
+            font-size: 14px;
+            color: var(--black500);
+            background-color: unset;
+            cursor: pointer;
+          }
+        }
+
+        .commentContent {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .commentUpdateForm {
+      display: flex;
+      gap: 8px;
+      
+     input {
+       flex: 1 1 0;
+       padding: 8px 16px;
+       font-size: 14px;
+       border-radius: 4px;
+     }
+
+     button {
+      width: 50px;
+      color: var(--white);
+      border-radius: 4px;
+      background-color: var(--black500);
+      cursor: pointer;
+
+      :disabled {
+        cursor: not-allowed;
+      }
+     }
+    }
+
+    .noComment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 0;
+
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--black500);
+    }
+  }
+}
+
+#commentForm {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  padding: 16px 0;
+
+  input {
+    flex: 1 1 0;
+    width: 100%;
+    padding: 8px 16px;
+    border-radius: 4px;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    color: var(--white);
+    border-radius: 4px;
+    background-color: var(--black);
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    .loader {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+#tradeForm {
+  overflow-x: scroll;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  height: calc(100vh - 52px);
+  padding: 16px;
+
+  .tradeFormContainer {
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    background-color: var(--white);
+
+    .formSection {
+      display: block;
+      padding: 16px;
+      background-color: var(--white);
+
+      .filter-group {
+        border: none;
+        padding-bottom: 0;
+      }
+
+      .tradeFormSpan {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 8px 0;
+      }
+
+      &.tradeStatus {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &.tradeTitle {
+        input {
+          width: 100%;
+          padding: 8px;
+          font-size: 16px;
+          word-break: keep-all;
+          border-radius: 4px;
+          background-color: var(--black200);
+        }
+      }
+
+      &.tradeDesc {
+        textarea {
+          width: 100%;
+          min-height: 150px;
+          padding: 8px;
+          height: auto;
+          border-radius: 4px;
+          background-color: var(--black200);
+          resize: none;
+        }
+      }
+    }
+
+    .haveCards,
+    .wantCards {
+      ul {
+        overflow-y: scroll;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+
+        li {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          filter: saturate(0);
+
+          &.active {
+            filter: saturate(1);
+
+            button:disabled {
+              cursor: not-allowed;
+            }
+          }
+
+          .quantity {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50%;
+            padding: 2px 0;
+            font-size: 12px;
+            text-align: center;
+            color: var(--white);
+            border-radius: 0 20px 0 0;
+            background-color: #4a5568;
+
+            @media screen and (max-width: 489px) {
+              padding: 0;
+            }
+          }
+
+          .minusBtn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 1;
+            width: 24px;
+            height: 24px;
+            background-color: unset;
+
+            .lucide-minus {
+              width: 24px;
+              height: 24px;
+              color: var(--red500);
+              border: 1px solid var(--black200);
+              border-radius: 24px;
+              background-color: var(--white);
+            }
+          }
+
+          .cardAddBtn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-width: 100px;
+            height: 100%;
+            min-height: 100px;
+            border-radius: 4px;
+            background-color: var(--black200);
+            cursor: pointer;
+
+            .lucide-square-plus {
+              color: var(--black500);
+            }
+
+            span {
+              padding-top: 4px;
+              color: var(--black500);
+            }
+          }
+
+          img {
+            height: auto;
+            max-width: 367px;
+            max-height: 512px;
+          }
+
+          button {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .noHaveCards {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      p,
+      span {
+        font-size: 14px;
+        color: var(--black500);
+
+        a {
+          color: var(--blue500);
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .tradeBtn {
+      padding: 16px;
+      .tradeBtnContainer {
+        button {
+          width: 100%;
+          height: 40px;
+          text-align: center;
+          color: var(--white);
+          border-radius: 4px;
+          background-color: var(--black);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

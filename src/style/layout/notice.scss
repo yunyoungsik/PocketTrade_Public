@@ -1,0 +1,86 @@
+#notice {
+  padding-bottom: 16px;
+  min-height: calc(100vh - 52px);
+
+  .noticeList {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--black250);
+
+    li {
+      &:hover {
+        background-color: var(--black250);
+      }
+
+      .noticeItem {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 16px 0;
+        margin: 0 16px;
+        border-bottom: 1px solid var(--black250);
+
+        h2 {
+          font-size: 16px;
+        }
+        span {
+          font-size: 14px;
+          color: var(--black500);
+        }
+      }
+    }
+  }
+
+  .writeTradeBtnWrap {
+    position: sticky;
+    bottom: 32px;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 16px;
+
+    .writeTradeBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      max-width: 102px;
+      padding: 8px 16px;
+      border-radius: 40px;
+      color: var(--white);
+      background-color: var(--black);
+    }
+  }
+
+  .noticeVeiw {
+    padding: 0 16px;
+
+    .noticeTitle {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 16px 0;
+      margin: 0 16px;
+      border-bottom: 1px solid var(--black250);
+
+      h2 {
+        font-size: 24px;
+        font-weight: bold;
+      }
+      span {
+        font-size: 14px;
+        color: var(--black500);
+      }
+    }
+
+    p {
+      margin: 16px;
+      white-space: pre-wrap;
+      line-height: 162%;
+      overflow-wrap: anywhere;
+      font-size: 16px;
+    }
+  }
+}

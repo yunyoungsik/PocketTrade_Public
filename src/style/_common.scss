@@ -1,0 +1,132 @@
+body,
+button {
+  font-family: Pretendard, Apple SD Gothic Neo, sans-serif;
+  font-weight: normal;
+}
+
+#wrap {
+  overflow: hidden;
+  width: 100%;
+  max-width: var(--max-width);
+  min-width: var(--min-width);
+  height: 100vh;
+  margin: 0 auto;
+
+  border: 1px solid var(--black300);
+  background-color: var(--bg-color);
+}
+
+.sr-only {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.loader-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.loader {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 48px;
+  height: 48px;
+  border: 5px solid var(--black500);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// radio button
+.filter-group {
+  border-bottom: 1px solid var(--black200);
+  padding-bottom: 16px;
+}
+
+.filter-label {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.filter-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.filter-option {
+  position: relative;
+  padding-left: 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.hidden-radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.custom-radio {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid #aaa;
+  border-radius: 50%;
+  background: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.filter-option.selected .custom-radio {
+  border-color: var(--black);
+  background: var(--black);
+}
+
+.filter-option.selected .custom-radio::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.select-group {
+  display: flex;
+  font-display: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  select {
+    width: 50%;
+    padding: 12px;
+    border: 1px solid var(--black300);
+    border-radius: 4px;
+  }
+}

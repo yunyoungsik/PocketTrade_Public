@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
+
+:root {
+  --min-width: 320px;
+  --max-width: 600px;
+
+  --text-opacity: .6;
+  --bg-color: #F5F5F5;
+
+  --black: #333;
+  --black100: #f8f8f8;
+  --black200: #f3f4f5;
+  --black250: #e4e4e4;
+  --black300: #d3d3d3;
+  --black400: #acacac;
+  --black500: #8f8f8f;
+  --black600: #707070;
+  --black700: #595959;
+  --black800: #4d4d4d;
+  --black900: #202d37;
+  // --black900: #1e1e20;
+
+  --white: #fff;
+  --white100: #f5f5f5;
+
+  --blue: #5383e8;
+  --blue100: #ecf2ff;
+  --blue200: #d5e3ff;
+  --blue300: #b3cdff;
+  --blue400: #81acff;
+  --blue500: #5383e8;
+  --blue600: #4171d6;
+  --blue700: #2f5ec0;
+  --blue800: #2f436e;
+  --blue900: #28344e;
+
+  --red100: #fff1f3;
+  --red200: #ffd8d9;
+  --red300: #ffbac3;
+  --red400: #ff6c81;
+  --red500: #e84057;
+  --red600: #d31a45;
+  --red700: #b61337;
+  --red800: #703c47;
+  --red900: #59343b;
+
+  --green: #07f468;
+  --green100: #d4f8d7;
+  --green200: #a0eeb4;
+  --green300: #6bdf8f;
+  --green400: #47d472;
+  --green500: #05e45f;
+  --green600: #05cb55;
+  --green700: #04b048;
+  --green800: #038c35;
+  --green900: #026f28;
+
+  /* 폰트 셋팅 */
+  font-family: var(--font-pretendard), sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 45;
+
+  /* 폰트 최적화 */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
