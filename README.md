@@ -14,7 +14,7 @@ PocketTrade는 Next.js와 MongoDB를 기반으로 구축된 포켓몬 카드 교
 2025-02-01 ~ 2025-02-15
 
 ## 링크
-[바로가기]()
+[바로가기](https://pocket-trade-theta.vercel.app)
 
 ## 개인작업
 |윤영식|
