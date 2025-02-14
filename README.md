@@ -1,5 +1,4 @@
 # PocketTrade
-<img style="width: 100%" src="https://raw.githubusercontent.com/yunyoungsik/pocket-trade/refs/heads/main/public/img/meta/meta.webp?token=GHSAT0AAAAAAC4ZSHLDPOJO6PVUHN7DHWLQZ5PO3SQ" alt="PocketTrade" />
 <br/>
 PocketTrade는 Next.js와 MongoDB를 기반으로 구축된 포켓몬 카드 교환 플랫폼입니다.<br />
 사용자는 보유한 카드를 등록하고, 원하는 카드를 게시글로 작성하여 다른 사용자와 댓글을 통해 소통하고 카드 교환을 진행할 수 있습니다.<br />
@@ -14,7 +13,7 @@ PocketTrade는 Next.js와 MongoDB를 기반으로 구축된 포켓몬 카드 교
 2025-02-01 ~ 2025-02-15
 
 ## 링크
-[바로가기](https://pocket-trade-theta.vercel.app)
+[바로가기](https://pocket-trade-ivory.vercel.app/)
 
 ## 개인작업
 |윤영식|
